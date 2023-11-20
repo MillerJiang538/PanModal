@@ -175,8 +175,11 @@ open class PanModalPresentationController: UIPresentationController {
     override public func presentationTransitionWillBegin() {
 
         guard let containerView = containerView
-            else { return }
-
+        else { return }
+        // Fix bug issue
+        if self.panContainerView.frame == .zero {
+            self.adjustPresentedViewFrame()
+        }
         layoutBackgroundView(in: containerView)
         layoutPresentedView(in: containerView)
         configureScrollViewInsets()
